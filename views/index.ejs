@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login/Register Page</title>
+  <link rel="stylesheet" href="./stylesheet/style.css">
+  <script src=script.js></script>
+</head>
+
+<body>
+ 
+  <%-include("./partials/header.ejs")%>
+  <div class="body-container"> 
+  <div class="search-container">
+    <form action="/search" class="signup" method="POST">
+    <input class="search-box" type="text" placeholder="Search for Movie..." name="title">
+    <input type="submit" class="search-button" value="Search">
+  </form>
+  </div>
+  
+  <%if(movieInfo && movieInfo.Title ){%>
+  <div class="movie-poster-container">
+    <img class="movie-poster-image" src="<%=movieInfo.Poster%>" alt="Movie Poster">
+    <div class="movie-name"><%=movieInfo.Title%></div>
+    <div class="buttons-container">
+      <!-- <form action="/addMyCollection/'<%=movieInfo.Title%>'" class="signup" method="GET">
+        <input type="submit" class="button" value="Add to Collection">
+      </form>   -->
+      <%if(userInfo.name){%>
+      <button class="button" onclick="addToMyCollection('<%=movieInfo.Title%>')">Detailszs</button>
+      <%}%>
+    </div>
+  </div>
+  <%}%>
+
+
+  <% movies && movies.forEach(movieInfo=>{ %>
+    <div class="movie-poster-container">
+      <img class="movie-poster-image" src="<%=movieInfo.Poster%>" alt="Movie Poster">
+      <div class="movie-name"><%=movieInfo.Title%></div>
+      <div class="buttons-container">
+        <!-- <form action="/addMyCollection/'<%=movieInfo.Title%>'" class="signup" method="GET">
+          <input type="submit" class="button" value="Add to Collection">
+        </form>   -->
+      </div>
+    </div>
+    <%})%>
+  
+
+
+
+</body>
+
+<script>
+ 
+  async function addToMyCollection(title){
+    const respone = await fetch(`./addMyCollection/${title}`);
+    alert("Sucessfully Added to Collection")
+  }
+  
+</script>
+
+</html>

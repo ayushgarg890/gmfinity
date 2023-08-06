@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "dotenv": "^16.3.1",
@@ -12,6 +13,7 @@
     "express-session": "^1.17.3",
     "mongoose": "^7.4.2",
     "node": "^19.0.1",
+    "nodemon": "^3.0.1",
     "winston": "^3.10.0"
   }
 }

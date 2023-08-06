@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "dependencies": {
     "dotenv": "^16.3.1",

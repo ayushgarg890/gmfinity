@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config()
-const serverless = require('serverless-http')
 
 const app = express();
 const session = require('express-session');
@@ -15,8 +14,6 @@ app.use(session({
   resave:false,
   saveUninitialized:false,
 }));
-
-app.use('/.netlify/functions/api')
 
 const MongoDB_URL = process.env.MONGO_URL;
 const DATA_KEY = process.env.API_KEY;

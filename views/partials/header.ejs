@@ -1,12 +1,19 @@
 <header>
   <%if(userInfo==="User"){%>
-  <Button><a href="/login" >
-    Login / Register
-  </a>
-  </Button>
-  <%}else{%>
-  Hi <%=userInfo.name%>,
-  <a href="/my-collection">My Collection</a>
-  <a href="/logout">Logout</a>
-  <%}%>
+    <Button class="login-register"><a href="/login">
+        Login / Register
+      </a>
+    </Button>
+    <%}else{%>
+      Hi <%=userInfo.name%>, &nbsp;
+        <Button class="login-register"><a href="/my-collection">
+            My Collection
+          </a>
+        </Button>
+        &nbsp;
+        <Button class="logout"><a href="/logout">
+            Logout
+          </a>
+        </Button>&nbsp;
+        <%}%>
 </header>

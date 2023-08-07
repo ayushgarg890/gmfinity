@@ -11,25 +11,36 @@ header {
     text-align: right;
 }
 
+.login-register {
+    color: #fff;
+    border: 0px;
+    height: 30px;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+    background: -webkit-linear-gradient(right, #a445b2, #fa4299);
+    border-radius: 5px;
+}
+
 .login-register a {
     color: #fff;
     text-decoration: none;
+    font-weight: bolder;
 }
 
-footer {
-    background-color: #333;
+.logout {
+    background: red;
     color: #fff;
-    text-align: center;
-    padding: 10px;
+    border: 0px;
+    border-radius: 5px;
+    height: 30px;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
 }
 
-footer p {
-    margin: 0;
+.logout a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bolder;
 }
 
-.login-register {
-    display: block;
-}
 
 .body-container {
     display: flex;
@@ -108,3 +119,5 @@ footer p {
 .button:hover {
     background-color: #0056b3;
 }
+
+

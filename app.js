@@ -77,7 +77,6 @@ app.post("/login", async (req, res) => {
     const password = req.body.password;
 
     const userinfo = await User.findOne({ email: email });
-
     if (userinfo.password === password) {
       req.session.userInfo = userinfo;
       res.redirect("/");
@@ -87,7 +86,7 @@ app.post("/login", async (req, res) => {
     }
   }
   catch (err) {
-    console.log(err);
+    res.redirect('/');
   }
 });
 

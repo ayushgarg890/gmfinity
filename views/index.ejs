@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gmfinity</title>
-  <link rel="stylesheet" href="./stylesheet/style.css">
+  <link rel="stylesheet"  type="text/css" href="/stylesheet/style.css">
   <script src=script.js></script>
 </head>
 
@@ -25,39 +25,79 @@
     <img class="movie-poster-image" src="<%=movieInfo.Poster%>" alt="Movie Poster">
     <div class="movie-name"><%=movieInfo.Title%></div>
     <div class="buttons-container">
-      <!-- <form action="/addMyCollection/'<%=movieInfo.Title%>'" class="signup" method="GET">
-        <input type="submit" class="button" value="Add to Collection">
-      </form>   -->
       <%if(userInfo.name){%>
-      <button class="button" onclick="addToMyCollection('<%=movieInfo.Title%>')">Add to Collection</button>
+      <button class="button" onclick="addToMyCollection('<%=movieInfo.Title%>','public')">Add to Public Collection</button>
+      <button class="button" onclick="addToMyCollection('<%=movieInfo.Title%>','private')">Add to Private Collection</button>
       <%}%>
     </div>
   </div>
   <%}%>
 
 
-  <% movies && movies.forEach(movieInfo=>{ %>
+  <%if(publicCollection || privateCollection){%>
+    <Button class="login-register"><a href="/my-collection/user">All Collection</a></Button>
+    <Button class="login-register"><a href="/my-collection/private">Private</a></Button>
+    <Button class="login-register"><a href="/my-collection/public">Public</a></Button>
+  <%}%>
+
+
+  <% if(publicCollection!=undefined){%>
+    <p style="text-align: left;"><span class="collection-name">Public Collection</span>
+      
+      <%if(publicCollection.length>0){%>
+        <button class="share-collection" style="margin-bottom: 1px;" onclick="genrateLink('public')">Share Your Collection</button>
+        <%}%>  
+      </p>
+  <div class="movies-poster-container">
+    <%if(publicCollection.length==0){%>
+      <h3 align="center">No Public Collection Found</h3>
+      <%}%>  
+
+  <% publicCollection.forEach(movieInfo=>{ %>
     <div class="movie-poster-container">
       <img class="movie-poster-image" src="<%=movieInfo.Poster%>" alt="Movie Poster">
-      <div class="movie-name"><%=movieInfo.Title%></div>
-      <div class="buttons-container">
-        <!-- <form action="/addMyCollection/'<%=movieInfo.Title%>'" class="signup" method="GET">
-          <input type="submit" class="button" value="Add to Collection">
-        </form>   -->
-      </div>
+      <p class="movie-name"><%=movieInfo.Title%></p>
+      
     </div>
     <%})%>
+  </div>
+  <%}%>
   
-
+  <% if(privateCollection){%>
+    <p style="text-align: left;"><span class="collection-name">Private Collection</span>
+      
+      <%if(privateCollection.length>0){%>
+        <button class="share-collection" style="margin-bottom: 1px;" onclick="genrateLink('private')">Share Your Collection</button>
+        <%}%>  
+      </p>
+    <div class="movies-poster-container">
+    <%if(privateCollection.length==0){%>
+      <h3 align="center">No Private Collection Found</h3>
+      <%}%>  
+    <% privateCollection.forEach(movieInfo=>{ %>
+      <div class="movie-poster-container">
+        <img class="movie-poster-image" src="<%=movieInfo.Poster%>" alt="Movie Poster">
+        <p class="movie-name"><%=movieInfo.Title%></p>
+        
+      </div>
+      <%})%>
+    </div>
+    <%}%>  
 
 
 </body>
 
 <script>
  
-  async function addToMyCollection(title){
-    const respone = await fetch(`./addMyCollection/${title}`);
+  async function addToMyCollection(title,collectionType){
+    const respone = await fetch(`./addMyCollection/${title}/${collectionType}`);
     alert("Sucessfully Added to Collection")
+  }
+
+  async function genrateLink(type){
+    const response = await fetch(`/generate-link/${type}`);
+    const data = await response.json();
+    alert("Your "+type + " Collection URL: "+ data.link);
   }
   
 </script>

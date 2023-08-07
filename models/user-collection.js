@@ -10,6 +10,10 @@ title:{
     type:String,
     required:true,
 },
+collectiontype:{
+    type:String,
+    required:true,
+}
 });
 
 //collection creation
